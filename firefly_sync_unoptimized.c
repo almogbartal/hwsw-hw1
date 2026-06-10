@@ -23,7 +23,7 @@ double rand_double() {
 
 int main() {
     // Seed random number generator
-    srand((unsigned int)time(NULL));
+    srand(42);
 
     // Allocate memory on the heap since 50k structs will overflow the stack
     Firefly *fireflies = (Firefly *)malloc(NUM_FIREFLIES * sizeof(Firefly));
