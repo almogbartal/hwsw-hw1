@@ -2,7 +2,7 @@ CC      := cc
 CFLAGS  := -O0 -Wall -Wextra
 LDLIBS  := -lm
 
-BIN := firefly_kuramoto
+BIN := firefly_sync_unoptimized
 
 all: $(BIN)
 
