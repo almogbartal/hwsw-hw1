@@ -13,6 +13,6 @@ also the firefly phases should also be initialized as uniformly random on [0:2pi
 make it stop whenever the simulation has converged
 
 
-#final prompt
+# final prompt
 
 "please write a simple, single-threaded C program that simulates firefly synchronization using the Kuramoto model for 50,000 fireflies. each firefly lives on a [0,1]x[0,1] square and should be represented by a struct holding its ID, x and y coordinates, phase, and frequency. the coupling should be based on the Euclidean distance by comparing each firefly to all other fireflies in the simulation."
