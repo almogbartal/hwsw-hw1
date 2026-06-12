@@ -5,5 +5,5 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-
-perf stat -r 10 -e branch-instructions,branch-misses,cache-references,cache-misses,cpu-cycles,cpu-clock,page-faults ./firefly_sync_unoptimized 200
+# "$@" captures all arguments passed to the script
+perf stat -r 10 -e branch-instructions,branch-misses,cache-references,cache-misses,cpu-cycles,cpu-clock,page-faults "$@"
