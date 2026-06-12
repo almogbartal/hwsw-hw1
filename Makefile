@@ -2,14 +2,14 @@ CC      := cc
 CFLAGS  := -O0 -Wall -Wextra
 LDLIBS  := -lm
 
-BIN := firefly_sync_unoptimized
+BINS := firefly_sync_unoptimized firefly_sync_optimized
 
-all: $(BIN)
+all: $(BINS)
 
-$(BIN): $(BIN).c
+%: %.c
 	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
 
 clean:
-	rm -f $(BIN)
+	rm -f $(BINS)
 
 .PHONY: all clean
