@@ -1,7 +1,7 @@
 /*
- * firefly_sync_optimized.c -- Kuramoto firefly sync, optimized single-threaded.
+ * opt_1_2_3.c -- Kuramoto firefly sync with opts #1, #2, #3 combined.
  *
- * Same model, same parameters, same RNG seed as firefly_sync_unoptimized.c.
+ * Same model, same parameters, same RNG seed as unoptimized.c.
  * Optimizations vs. the baseline:
  *
  *   #1  Trig-free inner loop via the sin-of-difference identity
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
     for (int i = 0; i < N; ++i)
         if (rowsum[i] <= 0.0) rowsum[i] = 1.0;
 
-    printf("# Kuramoto firefly synchronization (single threaded, optimized)\n");
+    printf("# Kuramoto firefly synchronization (opt_1_2_3: #1 + #2 + #3)\n");
     printf("# N=%d  OMEGA=%.3f  K=%.3f  SIGMA=%.3f  DT=%.3f  seed=42\n",
            N, OMEGA, K, SIGMA, DT);
     printf("# convergence criterion: order parameter r >= %.6f\n", R_CONVERGE);

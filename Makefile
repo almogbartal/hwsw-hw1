@@ -2,7 +2,7 @@ CC      := cc
 CFLAGS  := -g -O0 -Wall -Wextra -fno-omit-frame-pointer
 LDLIBS  := -lm
 
-BINS := optimized unoptimized unoptimized_orig 
+BINS := unoptimized opt_1 opt_1_2 opt_3 opt_4 opt_5 opt_6 opt_7 opt_1_2_3 unoptimized_orig
 
 all: $(BINS)
 

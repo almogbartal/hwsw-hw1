@@ -69,3 +69,66 @@ The matvec is rewritten as a pair walk: for each unordered pair `(i,j)` with
 
 Row sums (`rowsum[i]`) are computed during precomputation by the same pair
 walk, so the symmetric storage extends cleanly to initialization.
+
+# Ablation
+
+Each ablation variant changes **one thing** vs. the baseline so each
+optimization can be measured in isolation.
+
+| Label   | File           | Optimization isolated                                | Key perf event to watch                |
+|---------|----------------|------------------------------------------------------|----------------------------------------|
+| opt_0   | `unoptimized.c`| (none -- control)                                    | --                                     |
+| opt_1   | `opt_1.c`      | sin-of-difference identity (no trig in inner loop)   | `instructions`, `cycles` (IPC)         |
+| opt_1_2 | `opt_1_2.c`    | opt_1 + reuse `s[]`/`c[]` for the order parameter    | `instructions` vs opt_1 (drops 2N)     |
+| opt_3   | `opt_3.c`      | packed upper-triangle W + pair-walk matvec           | `LLC-load-misses` at large N           |
+| opt_4   | `opt_4.c`      | drop `if (i == j) continue` from the inner loop      | `instructions`, IPC (vectorization)    |
+| opt_5   | `opt_5.c`      | store W as `float` (half the W footprint)            | `L1-dcache-load-misses`, `LLC` at mid N |
+| opt_6   | `opt_6.c`      | Structure-of-Arrays firefly layout                   | `L1-dcache-load-misses`, IPC           |
+| opt_7   | `opt_7.c`      | Z-order (Morton) reindexing of fireflies             | `L1-dcache-load-misses`, `LLC`         |
+| opt_1_2_3 | `opt_1_2_3.c` | #1 + #2 + #3 combined                              | every event vs opt_0                   |
+
+Notes:
+- opt_1_2 isn't "opt_2 alone" because optimization #2 (reusing `s[]`/`c[]`
+  for the order parameter) only makes sense on top of #1, which builds those
+  tables in the first place.
+- opt_3, by switching to an `i<j` pair walk, naturally has no `i==j` branch.
+  That's intrinsic to the storage layout, not an extra optimization.
+- opt_5's dynamics differ by a tiny amount of float rounding per W entry;
+  the convergence trajectory stays well within the 1e-4 threshold.
+- opt_6 (SoA) and opt_7 (Z-order) leave the math identical to baseline --
+  they are pure data-layout changes targeting L1.
+
+## Reproduce
+
+```
+make clean && make all
+./measure.sh --all 1000
+```
+
+Produces `opt_0_N1000.{stats,data}` ... `opt_7_N1000.{stats,data}` plus
+`opt_1_2_3_N1000.{stats,data}` in the current directory. The `.stats` files
+hold `perf stat -r 10` output, the `.data` files are `perf record -F 999 -g`
+captures suitable for `perf report` / `perf annotate`. Re-running at a
+different N (e.g. `./measure.sh --all 2000`) produces a parallel set of
+`_N2000.{stats,data}` files instead of overwriting.
+
+To see flamegraph-style hotspots for a specific variant:
+```
+perf report -i opt_1_2_3_N1000.data
+perf annotate -i opt_1_2_3_N1000.data
+```
+
+`measure.sh` flags:
+- `./measure.sh <prog> [args]` -- `perf stat -r 10` (default)
+- `./measure.sh --once <prog> [args]` -- single `perf stat` run
+- `./measure.sh --record <prog> [args]` -- `perf record` to `perf.data`
+- `./measure.sh --all <N>` -- full ablation sweep, results land in `results/N=<N>/`
+
+Event list (shared by all modes):
+```
+cycles, instructions, task-clock,
+branch-instructions, branch-misses,
+L1-dcache-load-misses, LLC-load-misses, dTLB-load-misses,
+stalled-cycles-frontend, stalled-cycles-backend,
+page-faults, context-switches
+```
