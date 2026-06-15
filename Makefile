@@ -2,7 +2,7 @@ CC      := cc
 CFLAGS  := -g -O0 -Wall -Wextra -fno-omit-frame-pointer
 LDLIBS  := -lm
 
-BINS := firefly_sync_unoptimized firefly_sync_optimized
+BINS := optimized unoptimized unoptimized_orig 
 
 all: $(BINS)
 
