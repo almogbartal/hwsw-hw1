@@ -115,19 +115,21 @@ int main(int argc, char **argv) {
 
     /* precompute distance-based coupling weights once (positions never change).
        w_ij = exp(-euclidean_distance / SIGMA), self-coupling excluded. */
+    for (int i = 0; i < N; ++i) rowsum[i] = 0.0;
+    size_t idx = 0;
     for (int i = 0; i < N; ++i) {
-        double s = 0.0;
-        for (int j = 0; j < N; ++j) {
-            if (i == j) { W[(size_t)i * N + j] = 0.0; continue; }
+        for (int j = i + 1; j < N; ++j) {
             double dx = f[i].x - f[j].x;
             double dy = f[i].y - f[j].y;
-            double d  = sqrt(dx * dx + dy * dy);   /* Euclidean distance */
+            double d  = sqrt(dx * dx + dy * dy);
             double w  = exp(-d / SIGMA);
-            W[(size_t)i * N + j] = w;
-            s += w;
+            W[idx++]  = w;
+            rowsum[i] += w;
+            rowsum[j] += w;
         }
-        rowsum[i] = (s > 0.0) ? s : 1.0;
     }
+    for (int i = 0; i < N; ++i)
+        if (rowsum[i] <= 0.0) rowsum[i] = 1.0;
 
     printf("# Kuramoto firefly synchronization (single threaded)\n");
     printf("# N=%d  OMEGA=%.3f  K=%.3f  SIGMA=%.3f  DT=%.3f  seed=42\n",
