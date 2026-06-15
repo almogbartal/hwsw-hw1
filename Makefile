@@ -1,5 +1,5 @@
 CC      := cc
-CFLAGS  := -O0 -Wall -Wextra
+CFLAGS  := -g -O0 -Wall -Wextra -fno-omit-frame-pointer
 LDLIBS  := -lm
 
 BINS := firefly_sync_unoptimized firefly_sync_optimized
