@@ -9,6 +9,8 @@
 #   ./measure.sh --all <N>                     run every binary at fireflies=N;
 #                                              writes opt_<id>_N<N>.stats and
 #                                              opt_<id>_N<N>.data into cwd
+#   ./measure.sh --check                       sanity-check: run every binary
+#                                              at N=200, show convergence line
 #
 # Event list is shared across modes so numbers are comparable.
 
@@ -25,8 +27,22 @@ BINS=(unoptimized opt_1 opt_1_2 opt_3 opt_4 opt_5 opt_6 opt_7 opt_1_2_3)
 LABELS=(opt_0     opt_1 opt_1_2 opt_3 opt_4 opt_5 opt_6 opt_7 opt_1_2_3)
 
 usage() {
-    echo "Usage: $0 [--once|--record|--all] <program|N> [args...]"
+    echo "Usage: $0 [--once|--record|--all|--check] <program|N> [args...]"
     exit 1
+}
+
+run_check() {
+    local N=200
+    for k in "${!BINS[@]}"; do
+        local bin="./${BINS[$k]}"
+        local lab="${LABELS[$k]}"
+        if [ ! -x "$bin" ]; then
+            echo "[measure.sh] skipping $bin (not built)" >&2
+            continue
+        fi
+        echo "=== $lab ($bin $N) ==="
+        "$bin" "$N" | tail -2
+    done
 }
 
 run_stat() {
@@ -75,6 +91,9 @@ case "$1" in
     --all)
         shift
         run_all "$@"
+        ;;
+    --check)
+        run_check
         ;;
     *)
         run_stat "-r 10" "$@"
