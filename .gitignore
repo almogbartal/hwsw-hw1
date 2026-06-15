@@ -1,2 +1,6 @@
 firefly_sync_unoptimized
 firefly_sync_optimized
+*.dSYM
+optimized 
+unoptimized 
+unoptimized_orig
