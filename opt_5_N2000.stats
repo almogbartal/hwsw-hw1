@@ -1,0 +1,23 @@
+
+ Performance counter stats for './opt_5 2000':
+
+      719696903558      cycles                    #    2.329 GHz                      (50.00%)
+     1299021414450      instructions              #    1.80  insn per cycle           (60.00%)
+         309075.36 msec task-clock                #    0.999 CPUs utilized          
+      113853540446      branch-instructions       #  368.368 M/sec                    (60.00%)
+        5750347191      branch-misses             #    5.05% of all branches          (60.00%)
+         167256176      cache-references          #  541.150 K/sec                    (60.00%)
+           6869438      cache-misses              #    4.107 % of all cache refs      (60.00%)
+      440397099726      L1-dcache-loads           #    1.425 G/sec                    (40.00%)
+        6839768195      L1-dcache-load-misses     #    1.55% of all L1-dcache accesses  (40.00%)
+      218734635001      dTLB-loads                #  707.706 M/sec                    (40.00%)
+           6328201      dTLB-load-misses          #    0.00% of all dTLB cache accesses  (40.00%)
+              4015      page-faults               #   12.990 /sec                   
+              1784      context-switches          #    5.772 /sec                   
+
+     309.293361116 seconds time elapsed
+
+     309.037332000 seconds user
+       0.071967000 seconds sys
+
+

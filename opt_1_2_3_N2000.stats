@@ -1,0 +1,23 @@
+
+ Performance counter stats for './opt_1_2_3 2000':
+
+      121874005527      cycles                    #    2.329 GHz                      (50.00%)
+      382294444686      instructions              #    3.14  insn per cycle           (60.01%)
+          52325.07 msec task-clock                #    0.999 CPUs utilized          
+        4307015603      branch-instructions       #   82.313 M/sec                    (59.99%)
+           9854714      branch-misses             #    0.23% of all branches          (60.00%)
+          42594207      cache-references          #  814.031 K/sec                    (60.00%)
+            568027      cache-misses              #    1.334 % of all cache refs      (59.99%)
+      185762944828      L1-dcache-loads           #    3.550 G/sec                    (40.01%)
+        3421155257      L1-dcache-load-misses     #    1.84% of all L1-dcache accesses  (40.00%)
+       92287021311      dTLB-loads                #    1.764 G/sec                    (40.00%)
+            828614      dTLB-load-misses          #    0.00% of all dTLB cache accesses  (40.01%)
+              4028      page-faults               #   76.980 /sec                   
+               453      context-switches          #    8.657 /sec                   
+
+      52.392711602 seconds time elapsed
+
+      52.294340000 seconds user
+       0.039963000 seconds sys
+
+
