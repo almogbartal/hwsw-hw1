@@ -1,0 +1,23 @@
+
+ Performance counter stats for './opt_7 1000':
+
+      181423468788      cycles                    #    2.329 GHz                      (50.00%)
+      326567298516      instructions              #    1.80  insn per cycle           (60.00%)
+          77891.62 msec task-clock                #    0.999 CPUs utilized          
+       29292272297      branch-instructions       #  376.064 M/sec                    (60.00%)
+        1423745143      branch-misses             #    4.86% of all branches          (60.01%)
+          48232484      cache-references          #  619.226 K/sec                    (60.01%)
+             25656      cache-misses              #    0.053 % of all cache refs      (60.00%)
+      113085965297      L1-dcache-loads           #    1.452 G/sec                    (40.00%)
+        1846388172      L1-dcache-load-misses     #    1.63% of all L1-dcache accesses  (39.99%)
+       56187380911      dTLB-loads                #  721.353 M/sec                    (39.99%)
+           2841242      dTLB-load-misses          #    0.01% of all dTLB cache accesses  (40.00%)
+              2058      page-faults               #   26.421 /sec                   
+               461      context-switches          #    5.918 /sec                   
+
+      77.944120928 seconds time elapsed
+
+      77.860320000 seconds user
+       0.039983000 seconds sys
+
+

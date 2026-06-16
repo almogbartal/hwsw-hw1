@@ -1,0 +1,23 @@
+
+ Performance counter stats for './unoptimized 1000':
+
+      185918782011      cycles                    #    2.329 GHz                      (49.99%)
+      326601548285      instructions              #    1.76  insn per cycle           (59.99%)
+          79812.79 msec task-clock                #    0.999 CPUs utilized          
+       29295844629      branch-instructions       #  367.057 M/sec                    (60.00%)
+        1444757712      branch-misses             #    4.93% of all branches          (60.00%)
+          52045364      cache-references          #  652.093 K/sec                    (60.01%)
+             27187      cache-misses              #    0.052 % of all cache refs      (60.01%)
+      113092010932      L1-dcache-loads           #    1.417 G/sec                    (40.00%)
+        1829960059      L1-dcache-load-misses     #    1.62% of all L1-dcache accesses  (40.00%)
+       56173525540      dTLB-loads                #  703.816 M/sec                    (39.99%)
+           2992453      dTLB-load-misses          #    0.01% of all dTLB cache accesses  (39.99%)
+              2046      page-faults               #   25.635 /sec                   
+               482      context-switches          #    6.039 /sec                   
+
+      79.882572458 seconds time elapsed
+
+      79.792660000 seconds user
+       0.035987000 seconds sys
+
+

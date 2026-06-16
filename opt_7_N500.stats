@@ -1,0 +1,23 @@
+
+ Performance counter stats for './opt_7 500':
+
+       54947415477      cycles                    #    2.329 GHz                      (49.99%)
+      108974812664      instructions              #    1.98  insn per cycle           (60.01%)
+          23595.01 msec task-clock                #    0.999 CPUs utilized          
+       10338895751      branch-instructions       #  438.181 M/sec                    (60.00%)
+         338411730      branch-misses             #    3.27% of all branches          (60.00%)
+          18044953      cache-references          #  764.778 K/sec                    (60.01%)
+              7620      cache-misses              #    0.042 % of all cache refs      (60.01%)
+       39035299539      L1-dcache-loads           #    1.654 G/sec                    (40.00%)
+         187438709      L1-dcache-load-misses     #    0.48% of all L1-dcache accesses  (40.00%)
+       19402518267      dTLB-loads                #  822.314 M/sec                    (39.99%)
+            146926      dTLB-load-misses          #    0.00% of all dTLB cache accesses  (39.99%)
+               578      page-faults               #   24.497 /sec                   
+               144      context-switches          #    6.103 /sec                   
+
+      23.612519199 seconds time elapsed
+
+      23.578117000 seconds user
+       0.019992000 seconds sys
+
+

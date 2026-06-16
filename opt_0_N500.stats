@@ -1,0 +1,23 @@
+
+ Performance counter stats for './unoptimized 500':
+
+       55408528809      cycles                    #    2.328 GHz                      (49.98%)
+      108932486688      instructions              #    1.97  insn per cycle           (59.98%)
+          23797.85 msec task-clock                #    0.999 CPUs utilized          
+       10337614476      branch-instructions       #  434.393 M/sec                    (60.00%)
+         347495481      branch-misses             #    3.36% of all branches          (60.01%)
+          18055487      cache-references          #  758.703 K/sec                    (60.03%)
+             11630      cache-misses              #    0.064 % of all cache refs      (60.02%)
+       39033194668      L1-dcache-loads           #    1.640 G/sec                    (40.00%)
+         187183854      L1-dcache-load-misses     #    0.48% of all L1-dcache accesses  (39.99%)
+       19397163472      dTLB-loads                #  815.081 M/sec                    (39.97%)
+            183781      dTLB-load-misses          #    0.00% of all dTLB cache accesses  (39.98%)
+               571      page-faults               #   23.994 /sec                   
+               153      context-switches          #    6.429 /sec                   
+
+      23.821472935 seconds time elapsed
+
+      23.771436000 seconds user
+       0.035982000 seconds sys
+
+
