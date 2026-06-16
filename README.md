@@ -130,7 +130,10 @@ Event list (shared by all modes):
 ```
 cycles, instructions, task-clock,
 branch-instructions, branch-misses,
-L1-dcache-load-misses, LLC-load-misses, dTLB-load-misses,
-stalled-cycles-frontend, stalled-cycles-backend,
+cache-references, cache-misses,
+L1-dcache-loads, L1-dcache-load-misses,
+dTLB-loads, dTLB-load-misses,
 page-faults, context-switches
 ```
+(LLC and stalled-cycles-{frontend,backend} are commonly `<not supported>` on
+ARM-host Linux VMs, so they are omitted by default.)
