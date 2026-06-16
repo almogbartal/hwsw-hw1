@@ -89,10 +89,11 @@ run_record_all() {
             continue
         fi
         echo "[measure.sh] === $lab (perf record $bin $N) ==="
+        # -e cpu-clock: software event, works in VMs without hardware PMU access.
         # --call-graph dwarf: don't rely on frame pointers (libm/libc on Ubuntu
         # are built without them, so default -g unwinding gives empty stacks).
-        # DWARF unwinding reads the binary's .debug_frame info instead.
-        perf record -F 999 --call-graph dwarf -o "${lab}.data" -- "$bin" "$N"
+        # -F 99: low sampling rate, plenty of samples for these long runs.
+        perf record -F 99 -e cpu-clock -g --call-graph dwarf -o "${lab}.data" -- "$bin" "$N"
         echo "[measure.sh]   -> ${lab}.data"
 
         if [ "$fg_ok" = "1" ]; then
