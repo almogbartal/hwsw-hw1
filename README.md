@@ -102,7 +102,8 @@ Notes:
 
 ```
 make clean && make all
-./measure.sh --all 1000
+./measure.sh --stats 1000     # writes opt_<id>_N1000.stats (single run per variant)
+./measure.sh --record 1000    # writes opt_<id>_N1000.data
 ```
 
 Produces `opt_0_N1000.{stats,data}` ... `opt_7_N1000.{stats,data}` plus
@@ -119,10 +120,11 @@ perf annotate -i opt_1_2_3_N1000.data
 ```
 
 `measure.sh` flags:
-- `./measure.sh <prog> [args]` -- `perf stat -r 10` (default)
-- `./measure.sh --once <prog> [args]` -- single `perf stat` run
-- `./measure.sh --record <prog> [args]` -- `perf record` to `perf.data`
-- `./measure.sh --all <N>` -- full ablation sweep, results land in `results/N=<N>/`
+- `./measure.sh <prog> [args]` -- `perf stat -r 10` on a single program
+- `./measure.sh --once <prog> [args]` -- single `perf stat` run on one program
+- `./measure.sh --stats <N>` -- `perf stat` on every variant at fireflies=N (single run each)
+- `./measure.sh --record <N>` -- `perf record -F 999 -g` on every variant at fireflies=N
+- `./measure.sh --check` -- quick correctness pass: run each variant at N=200, show the convergence line
 
 Event list (shared by all modes):
 ```
