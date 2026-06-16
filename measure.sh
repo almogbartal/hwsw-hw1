@@ -89,9 +89,10 @@ run_record_all() {
             continue
         fi
         echo "[measure.sh] === $lab (perf record $bin $N) ==="
-        # perf record writes the profile to ${lab}.data via -o. Program output
-        # goes to the terminal naturally.
-        perf record -F 999 -g -o "${lab}.data" -- "$bin" "$N"
+        # --call-graph dwarf: don't rely on frame pointers (libm/libc on Ubuntu
+        # are built without them, so default -g unwinding gives empty stacks).
+        # DWARF unwinding reads the binary's .debug_frame info instead.
+        perf record -F 999 --call-graph dwarf -o "${lab}.data" -- "$bin" "$N"
         echo "[measure.sh]   -> ${lab}.data"
 
         if [ "$fg_ok" = "1" ]; then
