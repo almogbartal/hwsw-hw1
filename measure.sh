@@ -10,7 +10,9 @@
 #                                              writes opt_<id>_N<N>.stats into cwd
 #   ./measure.sh --record <N>                  perf record -F 999 -g on every
 #                                              variant at fireflies=N; writes
-#                                              opt_<id>_N<N>.data into cwd
+#                                              opt_<id>_N<N>.data and the
+#                                              corresponding .html flame graph
+#                                              (via FlameGraph/) into cwd
 #   ./measure.sh --check                       sanity-check: run every binary
 #                                              at N=200, show convergence line
 #
@@ -71,6 +73,14 @@ run_stats_all() {
 run_record_all() {
     local N="$1"
     [ -z "$N" ] && usage
+
+    local fg_ok=1
+    if [ ! -x FlameGraph/stackcollapse-perf.pl ] || [ ! -x FlameGraph/flamegraph.pl ]; then
+        echo "[measure.sh] FlameGraph/ scripts not found -- skipping .html generation" >&2
+        echo "[measure.sh]   populate it with: git clone https://github.com/brendangregg/FlameGraph" >&2
+        fg_ok=0
+    fi
+
     for k in "${!BINS[@]}"; do
         local bin="./${BINS[$k]}"
         local lab="${LABELS[$k]}_N${N}"
@@ -83,6 +93,16 @@ run_record_all() {
         # goes to the terminal naturally.
         perf record -F 999 -g -o "${lab}.data" -- "$bin" "$N"
         echo "[measure.sh]   -> ${lab}.data"
+
+        if [ "$fg_ok" = "1" ]; then
+            # Resolve symbols, fold stacks, render the flame graph.
+            # .html extension because browsers render SVG content from .html.
+            perf script -i "${lab}.data" \
+                | FlameGraph/stackcollapse-perf.pl \
+                | FlameGraph/flamegraph.pl --title "$lab" --subtitle "fireflies=$N" \
+                > "${lab}.html"
+            echo "[measure.sh]   -> ${lab}.html"
+        fi
     done
 }
 

@@ -123,7 +123,7 @@ perf annotate -i opt_1_2_3_N1000.data
 - `./measure.sh <prog> [args]` -- `perf stat -r 10` on a single program
 - `./measure.sh --once <prog> [args]` -- single `perf stat` run on one program
 - `./measure.sh --stats <N>` -- `perf stat` on every variant at fireflies=N (single run each)
-- `./measure.sh --record <N>` -- `perf record -F 999 -g` on every variant at fireflies=N
+- `./measure.sh --record <N>` -- `perf record -F 999 -g` on every variant at fireflies=N, plus an `.html` flame graph rendered from each `.data` file (requires `FlameGraph/` populated -- `git clone https://github.com/brendangregg/FlameGraph`)
 - `./measure.sh --check` -- quick correctness pass: run each variant at N=200, show the convergence line
 
 Event list (shared by all modes):
