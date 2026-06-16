@@ -1,0 +1,22 @@
+
+ Performance counter stats for './opt_5 500':
+
+                 0      cycles                    #    0.000 GHz                    
+      111568063175      instructions                                                
+          23557.54 msec task-clock                #    0.999 CPUs utilized          
+       15520659663      branch-instructions       #  658.840 M/sec                  
+         417834934      branch-misses             #    2.69% of all branches        
+         104335458      L1-dcache-load-misses                                       
+   <not supported>      LLC-load-misses                                             
+            119906      dTLB-load-misses                                            
+   <not supported>      stalled-cycles-frontend                                     
+   <not supported>      stalled-cycles-backend                                      
+               327      page-faults               #   13.881 /sec                   
+               158      context-switches          #    6.707 /sec                   
+
+      23.579222386 seconds time elapsed
+
+      23.526320000 seconds user
+       0.035980000 seconds sys
+
+

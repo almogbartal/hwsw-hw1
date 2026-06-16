@@ -1,0 +1,22 @@
+
+ Performance counter stats for './opt_3 1000':
+
+                 0      cycles                    #    0.000 GHz                    
+      203903808004      instructions                                                
+          43930.84 msec task-clock                #    0.999 CPUs utilized          
+       18916462029      branch-instructions       #  430.596 M/sec                  
+         843371165      branch-misses             #    4.46% of all branches        
+         780027904      L1-dcache-load-misses                                       
+   <not supported>      LLC-load-misses                                             
+           2007202      dTLB-load-misses                                            
+   <not supported>      stalled-cycles-frontend                                     
+   <not supported>      stalled-cycles-backend                                      
+              1070      page-faults               #   24.356 /sec                   
+               380      context-switches          #    8.650 /sec                   
+
+      43.992629864 seconds time elapsed
+
+      43.900879000 seconds user
+       0.039976000 seconds sys
+
+

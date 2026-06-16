@@ -1,0 +1,22 @@
+
+ Performance counter stats for './opt_6 500':
+
+                 0      cycles                    #    0.000 GHz                    
+      108141392014      instructions                                                
+          23277.26 msec task-clock                #    0.999 CPUs utilized          
+       15517545967      branch-instructions       #  666.640 M/sec                  
+         416082174      branch-misses             #    2.68% of all branches        
+         149189081      L1-dcache-load-misses                                       
+   <not supported>      LLC-load-misses                                             
+            235767      dTLB-load-misses                                            
+   <not supported>      stalled-cycles-frontend                                     
+   <not supported>      stalled-cycles-backend                                      
+               570      page-faults               #   24.487 /sec                   
+               182      context-switches          #    7.819 /sec                   
+
+      23.306220230 seconds time elapsed
+
+      23.234676000 seconds user
+       0.047943000 seconds sys
+
+
