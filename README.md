@@ -15,8 +15,12 @@ do it single threaded.
 
 to change fireflies phase you should compare each firefly against all the rest
 
+# Data 
 
-## Reproduce
+`perf stat` run results are stored in `stats/` and `perf record`+FlameGraph graphs are stored in `html/`. To generate data used for tables
+in the report, you can run `./gen_table_data.sh`.
+
+# Reproduce
 
 ```
 make clean && make all

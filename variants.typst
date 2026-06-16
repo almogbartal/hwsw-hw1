@@ -1,0 +1,25 @@
+// Ablation variants -- mirrors the table in README.md (without the
+// "Key perf event to watch" column).
+
+#set page(width: auto, height: auto, margin: 1cm)
+#set text(font: "New Computer Modern", size: 10pt)
+
+== Ablation variants
+
+#table(
+  columns: 3,
+  align: (left, left, left),
+  stroke: 0.5pt,
+  table.header(
+    [*Label*], [*File*], [*Optimization isolated*],
+  ),
+  [opt_0],     [`unoptimized.c`], [(none -- control)],
+  [opt_1],     [`opt_1.c`],       [sin-of-difference identity (no trig in inner loop)],
+  [opt_1_2],   [`opt_1_2.c`],     [opt_1 + reuse `s[]`/`c[]` for the order parameter],
+  [opt_3],     [`opt_3.c`],       [packed upper-triangle W + pair-walk matvec],
+  [opt_4],     [`opt_4.c`],       [drop `if (i == j) continue` from the inner loop],
+  [opt_5],     [`opt_5.c`],       [store W as `float` (half the W footprint)],
+  [opt_6],     [`opt_6.c`],       [Structure-of-Arrays firefly layout],
+  [opt_7],     [`opt_7.c`],       [Z-order (Morton) reindexing of fireflies],
+  [opt_1_2_3], [`opt_1_2_3.c`],   [#1 + #2 + #3 combined],
+)
